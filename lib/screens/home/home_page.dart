@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uzinfotasks/core/constants/app_images.dart';
+import 'package:uzinfotasks/core/constants/functions.dart';
 import 'package:uzinfotasks/core/constants/sizeconfig.dart';
 import 'package:uzinfotasks/core/models/weather_model.dart';
 import 'package:uzinfotasks/core/service/weather_service.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
+  String region;
+  HomePage({Key? key, required this.region}) : super(key: key);
   DateTime dateTime = DateTime.now();
   @override
   Widget build(BuildContext context) {
@@ -66,14 +68,14 @@ class HomePage extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                '${dateTime.day} - ${dateTime.month}',
+                                '${dateTime.day} ${IntToString.month(dateTime.month)}',
                                 style: TextStyle(
                                   fontSize: getHeight(35),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
-                                '${dateTime.weekday}',
+                                IntToString.weekDays(dateTime.weekday),
                                 style: TextStyle(
                                   fontSize: getHeight(20),
                                   // fontWeight: FontWeight.bold,
@@ -88,14 +90,14 @@ class HomePage extends StatelessWidget {
                           children: [
                             Image(
                               image: const AssetImage(
-                                AppImages.heavyRain,
+                                AppImages.lightRain,
                               ),
                               height: getHeight(100),
                             ),
                             Column(
                               children: [
                                 Text(
-                                  '+ 27 *',
+                                  "+${snap.data!.airT!.toInt()}",
                                   style: TextStyle(
                                     fontSize: getHeight(45),
                                     fontWeight: FontWeight.w400,
@@ -105,7 +107,7 @@ class HomePage extends StatelessWidget {
                                   height: getHeight(20),
                                 ),
                                 Text(
-                                  'Toshkent',
+                                  "${snap.data?.city?.title}",
                                   style: TextStyle(
                                     fontSize: getHeight(30),
                                     fontWeight: FontWeight.w400,
